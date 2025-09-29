@@ -19,8 +19,8 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
         <div class="bb ze ki xn 2xl:ud-px-0 oo wf yf i">
             <div class="vd to/4 tc wf yf">
                 <a href="{{ route('index') }}">
-                    <img class="om" src="images/logo-light.svg" alt="Logo Light" />
-                    <img class="xc nm" src="images/logo-dark.svg" alt="Logo Dark" />
+                    <img class="om" src="{{ asset('images/logo-light.svg') }}" alt="Logo Light" />
+                    <img class="xc nm" src="{{ asset('images/logo-dark.svg') }}" alt="Logo Dark" />
                 </a>
 
                 <!-- Hamburger Toggle BTN -->
@@ -55,7 +55,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                             <a href="#!" class="xl tc wf yf bg" @click.prevent="dropdown = !dropdown"
                                 :class="{
                                     'mk': page === 'blog-grid' || page === 'blog-single' || page === 'signin' ||
-                                        page === 'signup' || page === '404'
+                                        page === 'signup' || page === 'create'
                                 }">
                                 Pages
 
@@ -68,20 +68,24 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
 
                             <!-- Dropdown Start -->
                             <ul class="a" :class="{ 'tc': dropdown }">
-                                <li><a href="{{ route('blog-grid') }}" class="xl" :class="{ 'mk': page === 'blog-grid' }">Blog
+                                <li><a href="{{ route('blog-grid') }}" class="xl"
+                                        :class="{ 'mk': page === 'blog-grid' }">Blog
                                         Grid</a></li>
                                 <li><a href="{{ route('blog-single') }}" class="xl"
                                         :class="{ 'mk': page === 'blog-single' }">Blog Single</a></li>
-                                <li><a href="{{ route('signin') }}" class="xl" :class="{ 'mk': page === 'signin' }">Sign
+                                <li><a href="{{ route('signin') }}" class="xl"
+                                        :class="{ 'mk': page === 'signin' }">Sign
                                         In</a></li>
-                                <li><a href="{{ route('signup') }}" class="xl" :class="{ 'mk': page === 'signup' }">Sign
+                                <li><a href="{{ route('signup') }}" class="xl"
+                                        :class="{ 'mk': page === 'signup' }">Sign
                                         Up</a></li>
-                                <li><a href="{{ route('404') }}" class="xl" :class="{ 'mk': page === '404' }">404</a>
+                                <li><a href="{{ route('learning-centers.create') }}" class="xl"
+                                        :class="{ 'mk': page === 'create' }">Add Learning Center</a>
                                 </li>
                             </ul>
                             <!-- Dropdown End -->
                         </li>
-                        <li><a href="{{route('index')}}#support" class="xl">Support</a></li>
+                        <li><a href="{{ route('index') }}#support" class="xl">Support</a></li>
                     </ul>
                 </nav>
 
@@ -99,16 +103,32 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                                     fill="" />
                             </svg>
                             <!-- Icon Sun -->
-                            <img class="xc nm" src="images/icon-moon.svg" alt="Moon" />
+                            <img class="xc nm" src="{{asset('images/icon-moon.svg')}}" alt="Moon" />
                         </label>
                     </div>
 
-                    <a href="{{ route('signin') }}"
-                        :class="{ 'nk yl': page === 'home', 'ok': page === 'home' && stickyMenu }"
-                        class="ek pk xl">Sign In</a>
-                    <a href="{{ route('signup') }}"
-                        :class="{ 'hh/[0.15]': page === 'home', 'sh': page === 'home' && stickyMenu }"
-                        class="lk gh dk rg tc wf xf _l gi hi">Sign Up</a>
+                    @auth
+                        <form action="{{ route('logout') }}" method="POST" class="inline">
+                            @csrf
+                            <button type="submit"
+                                :class="{ 'nk yl': page === 'home', 'ok': page === 'home' && stickyMenu }"
+                                class="ek pk xl">Logout</button>
+                        </form>
+                        <a href="{{ route('index') }}"
+                            :class="{ 'hh/[0.15]': page === 'home', 'sh': page === 'home' && stickyMenu }"
+                            class="lk gh dk rg tc wf xf _l gi hi">{{ Auth::user()->name }}
+                        </a>
+                    @endauth
+
+                    @guest
+                        <a href="{{ route('signin') }}"
+                            :class="{ 'nk yl': page === 'home', 'ok': page === 'home' && stickyMenu }"
+                            class="ek pk xl">Sign In</a>
+                        <a href="{{ route('signup') }}"
+                            :class="{ 'hh/[0.15]': page === 'home', 'sh': page === 'home' && stickyMenu }"
+                            class="lk gh dk rg tc wf xf _l gi hi">Sign Up</a>
+                    @endguest
+
                 </div>
             </div>
         </div>
@@ -124,8 +144,8 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                 <div class="tc uf ap gg fp">
                     <div class="animate_top zd/2 to/4">
                         <a href="{{ route('index') }}">
-                            <img src="images/logo-light.svg" alt="Logo" class="om" />
-                            <img src="images/logo-dark.svg" alt="Logo" class="xc nm" />
+                            <img src="{{asset('images/logo-light.svg')}}" alt="Logo" class="om" />
+                            <img src="{{asset('images/logo-dark.svg')}}" alt="Logo" class="xc nm" />
                         </a>
 
                         <p class="lc fb">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -304,42 +324,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
 
     <!-- ====== Back To Top End ===== -->
 
-    <script>
-        //  Pricing Table
-        const setup = () => {
-            return {
-                isNavOpen: false,
 
-                billPlan: 'monthly',
-
-                plans: [{
-                        name: 'Starter',
-                        price: {
-                            monthly: 29,
-                            annually: 29 * 12 - 199,
-                        },
-                        features: ['400 GB Storaget', 'Unlimited Photos & Videos', 'Exclusive Support'],
-                    },
-                    {
-                        name: 'Growth Plan',
-                        price: {
-                            monthly: 59,
-                            annually: 59 * 12 - 100,
-                        },
-                        features: ['400 GB Storaget', 'Unlimited Photos & Videos', 'Exclusive Support'],
-                    },
-                    {
-                        name: 'Business',
-                        price: {
-                            monthly: 139,
-                            annually: 139 * 12 - 100,
-                        },
-                        features: ['400 GB Storaget', 'Unlimited Photos & Videos', 'Exclusive Support'],
-                    },
-                ],
-            };
-        };
-    </script>
     <script defer src="{{ asset('js/bundle.js') }}"></script>
 </body>
 

@@ -1,13 +1,19 @@
 <x-layout>
 
+    <x-slot:title>
+
+        Sign In - FindCourse
+
+    </x-slot>
+
     <main>
         <!-- ===== SignIn Form Start ===== -->
         <section class="i pg fh rm ki xn vq gj qp gr hj rp hr">
             <!-- Bg Shapes -->
-            <img src="images/shape-06.svg" alt="Shape" class="h j k" />
-            <img src="images/shape-03.svg" alt="Shape" class="h l m" />
-            <img src="images/shape-17.svg" alt="Shape" class="h n o" />
-            <img src="images/shape-18.svg" alt="Shape" class="h p q" />
+            <img src="{{asset('images/shape-06.svg')}}" alt="Shape" class="h j k" />
+            <img src="{{asset('images/shape-03.svg')}}" alt="Shape" class="h l m" />
+            <img src="{{asset('images/shape-17.svg')}}" alt="Shape" class="h n o" />
+            <img src="{{asset('images/shape-18.svg')}}" alt="Shape" class="h p q" />
 
             <div class="animate_top bb af i va sg hh sm vk xm yi _n jp hi ao kp">
                 <!-- Bg Border -->
@@ -86,10 +92,11 @@
                     </span>
                 </div>
 
-                <form class="sb" action="#!" method="#">
+                <form class="sb" action="{{ route('login') }}" method="post">
+                    @csrf
                     <div class="wb">
                         <label class="rc kk wm vb" for="username">Username</label>
-                        <input type="text" name="username" id="username" placeholder="example@gmail.com"
+                        <input type="text" name="email" id="username" placeholder="example@gmail.com"
                             class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" />
                     </div>
 
@@ -99,7 +106,7 @@
                             class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" />
                     </div>
 
-                    <button class="vd rj ek rc rg gh lk ml il _l gi hi">
+                    <button type="submit" class="vd rj ek rc rg gh lk ml il _l gi hi">
                         Sign In
                     </button>
 
@@ -114,4 +121,3 @@
     </main>
 
 </x-layout>
-

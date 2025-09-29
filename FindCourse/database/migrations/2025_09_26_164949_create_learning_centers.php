@@ -111,6 +111,17 @@ return new class extends Migration
             $table->foreignId('connection_id')->constrained('connection')->onDelete('cascade');
             $table->timestamps();
         });
+
+        // 12) need_teacher
+        Schema::create('need_teacher', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('learning_center_id');
+            $table->unsignedBigInteger('subject_id');
+            $table->timestamps();
+
+            $table->foreign('learning_center_id')->references('id')->on('learning_centers')->onDelete('cascade');
+            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
+        });
     }
 
     /**
@@ -129,5 +140,6 @@ return new class extends Migration
         Schema::dropIfExists('subjects_of_learning_centers');
         Schema::dropIfExists('subjects');
         Schema::dropIfExists('learning_centers');
+        Schema::dropIfExists('need_teacher');
     }
 };

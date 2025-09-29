@@ -1,13 +1,19 @@
 <x-layout>
 
+    <x-slot:title>
+
+        Sign Up - FindCourse
+
+    </x-slot>
+
     <main>
         <!-- ===== SignUp Form Start ===== -->
         <section class="i pg fh rm ki xn vq gj qp gr hj rp hr">
             <!-- Bg Shapes -->
-            <img src="images/shape-06.svg" alt="Shape" class="h j k" />
-            <img src="images/shape-03.svg" alt="Shape" class="h l m" />
-            <img src="images/shape-17.svg" alt="Shape" class="h n o" />
-            <img src="images/shape-18.svg" alt="Shape" class="h p q" />
+            <img src="{{ asset('images/shape-06.svg') }}" alt="Shape" class="h j k" />
+            <img src="{{ asset('images/shape-03.svg') }}" alt="Shape" class="h l m" />
+            <img src="{{ asset('images/shape-17.svg') }}" alt="Shape" class="h n o" />
+            <img src="{{ asset('images/shape-18.svg') }}" alt="Shape" class="h p q" />
 
             <div class="animate_top bb af i va sg hh sm vk xm yi _n jp hi ao kp">
                 <!-- Bg Border -->
@@ -86,10 +92,11 @@
                     </span>
                 </div>
 
-                <form class="sb" action="#!" method="#!">
+                <form class="sb" action="{{ route('register') }}" method="post">
+                    @csrf
                     <div class="wb">
                         <label class="rc kk wm vb" for="fullname">Full name</label>
-                        <input type="text" name="fullname" id="fullname" placeholder="Devid Wonder"
+                        <input type="text" name="name" id="fullname" placeholder="Devid Wonder"
                             class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" />
                     </div>
 
@@ -105,7 +112,7 @@
                             class="vd hh rg zk _g ch hm dm fm pl/50 xi mi sm xm pm dn/40" />
                     </div>
 
-                    <button class="vd rj ek rc rg gh lk ml il _l gi hi">
+                    <button type="submit" class="vd rj ek rc rg gh lk ml il _l gi hi">
                         Sign Up
                     </button>
 

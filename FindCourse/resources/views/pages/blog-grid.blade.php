@@ -1,5 +1,11 @@
 <x-layout>
 
+    <x-slot:title>
+
+        Blog Grid - FindCourse
+
+    </x-slot>
+
     <main>
         <!-- ===== Blog Grid Start ===== -->
         <section class="ji gp uq">
@@ -8,7 +14,7 @@
                     <!-- Blog Item -->
                     <div class="animate_top sg vk rm xm">
                         <div class="c rc i z-1 pg">
-                            <img class="w-full" src="images/blog-01.png" alt="Blog" />
+                            <img class="w-full" src="{{asset('images/blog-01.png')}}" alt="Blog" />
 
                             <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
                                 <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Read More</a>
@@ -18,11 +24,11 @@
                         <div class="yh">
                             <div class="tc uf wf ag jq">
                                 <div class="tc wf ag">
-                                    <img src="images/icon-man.svg" alt="User" />
+                                    <img src="{{asset('images/icon-man.svg')}}" alt="User" />
                                     <p>Musharof Chy</p>
                                 </div>
                                 <div class="tc wf ag">
-                                    <img src="images/icon-calender.svg" alt="Calender" />
+                                    <img src="{{asset('images/icon-calender.svg')}}" alt="Calender" />
                                     <p>25 Dec, 2025</p>
                                 </div>
                             </div>
@@ -35,7 +41,7 @@
                     <!-- Blog Item -->
                     <div class="animate_top sg vk rm xm">
                         <div class="c rc i z-1 pg">
-                            <img class="w-full" src="images/blog-02.png" alt="Blog" />
+                            <img class="w-full" src="{{asset('images/blog-02.png')}}" alt="Blog" />
 
                             <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
                                 <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Read More</a>
@@ -45,11 +51,11 @@
                         <div class="yh">
                             <div class="tc uf wf ag jq">
                                 <div class="tc wf ag">
-                                    <img src="images/icon-man.svg" alt="User" />
+                                    <img src="{{asset('images/icon-man.svg')}}" alt="User" />
                                     <p>Musharof Chy</p>
                                 </div>
                                 <div class="tc wf ag">
-                                    <img src="images/icon-calender.svg" alt="Calender" />
+                                    <img src="{{asset('images/icon-calender.svg')}}" alt="Calender" />
                                     <p>25 Dec, 2025</p>
                                 </div>
                             </div>
@@ -62,7 +68,7 @@
                     <!-- Blog Item -->
                     <div class="animate_top sg vk rm xm">
                         <div class="c rc i z-1 pg">
-                            <img class="w-full" src="images/blog-03.png" alt="Blog" />
+                            <img class="w-full" src="{{asset('images/blog-03.png')}}" alt="Blog" />
 
                             <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
                                 <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Read More</a>
@@ -72,11 +78,11 @@
                         <div class="yh">
                             <div class="tc uf wf ag jq">
                                 <div class="tc wf ag">
-                                    <img src="images/icon-man.svg" alt="User" />
+                                    <img src="{{asset('images/icon-man.svg')}}" alt="User" />
                                     <p>Musharof Chy</p>
                                 </div>
                                 <div class="tc wf ag">
-                                    <img src="images/icon-calender.svg" alt="Calender" />
+                                    <img src="{{asset('images/icon-calender.svg')}}" alt="Calender" />
                                     <p>25 Dec, 2025</p>
                                 </div>
                             </div>
@@ -89,7 +95,7 @@
                     <!-- Blog Item -->
                     <div class="animate_top sg vk rm xm">
                         <div class="c rc i z-1 pg">
-                            <img class="w-full" src="images/blog-01.png" alt="Blog" />
+                            <img class="w-full" src="{{asset('images/blog-01.png')}}" alt="Blog" />
 
                             <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
                                 <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Read More</a>
@@ -99,11 +105,11 @@
                         <div class="yh">
                             <div class="tc uf wf ag jq">
                                 <div class="tc wf ag">
-                                    <img src="images/icon-man.svg" alt="User" />
+                                    <img src="{{asset('images/icon-man.svg')}}" alt="User" />
                                     <p>Musharof Chy</p>
                                 </div>
                                 <div class="tc wf ag">
-                                    <img src="images/icon-calender.svg" alt="Calender" />
+                                    <img src="{{asset('images/icon-calender.svg')}}" alt="Calender" />
                                     <p>25 Dec, 2025</p>
                                 </div>
                             </div>
@@ -116,7 +122,7 @@
                     <!-- Blog Item -->
                     <div class="animate_top sg vk rm xm">
                         <div class="c rc i z-1 pg">
-                            <img class="w-full" src="images/blog-02.png" alt="Blog" />
+                            <img class="w-full" src="{{asset('images/blog-02.png')}}" alt="Blog" />
 
                             <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
                                 <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Read More</a>
@@ -126,11 +132,11 @@
                         <div class="yh">
                             <div class="tc uf wf ag jq">
                                 <div class="tc wf ag">
-                                    <img src="images/icon-man.svg" alt="User" />
+                                    <img src="{{asset('images/icon-man.svg')}}" alt="User" />
                                     <p>Musharof Chy</p>
                                 </div>
                                 <div class="tc wf ag">
-                                    <img src="images/icon-calender.svg" alt="Calender" />
+                                    <img src="{{asset('images/icon-calender.svg')}}" alt="Calender" />
                                     <p>25 Dec, 2025</p>
                                 </div>
                             </div>
@@ -143,7 +149,7 @@
                     <!-- Blog Item -->
                     <div class="animate_top sg vk rm xm">
                         <div class="c rc i z-1 pg">
-                            <img class="w-full" src="images/blog-03.png" alt="Blog" />
+                            <img class="w-full" src="{{asset('images/blog-03.png')}}" alt="Blog" />
 
                             <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
                                 <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Read More</a>
@@ -153,11 +159,11 @@
                         <div class="yh">
                             <div class="tc uf wf ag jq">
                                 <div class="tc wf ag">
-                                    <img src="images/icon-man.svg" alt="User" />
+                                    <img src="{{asset('images/icon-man.svg')}}" alt="User" />
                                     <p>Musharof Chy</p>
                                 </div>
                                 <div class="tc wf ag">
-                                    <img src="images/icon-calender.svg" alt="Calender" />
+                                    <img src="{{asset('images/icon-calender.svg')}}" alt="Calender" />
                                     <p>25 Dec, 2025</p>
                                 </div>
                             </div>
@@ -234,7 +240,7 @@
         <!-- ===== CTA Start ===== -->
         <section class="i pg gh ji">
             <!-- Bg Shape -->
-            <img class="h p q" src="images/shape-16.svg" alt="Bg Shape" />
+            <img class="h p q" src="{{asset('images/shape-16.svg')}}" alt="Bg Shape" />
 
             <div class="bb ye i z-10 ki xn dr">
                 <div class="tc uf sn tn un gg">
