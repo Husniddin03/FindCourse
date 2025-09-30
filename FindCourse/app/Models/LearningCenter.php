@@ -11,12 +11,12 @@ class LearningCenter extends Model
 
     protected $fillable = [
         'logo', 'name', 'type', 'about', 'province', 'region',
-        'address', 'location', 'usersId', 'studentCount'
+        'address', 'location', 'users_id', 'student_count'
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'usersId');
+        return $this->belongsTo(User::class, 'users_id');
     }
 
     public function images()

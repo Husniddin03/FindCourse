@@ -9,6 +9,8 @@ class Calendar extends Model
 {
     use HasFactory;
 
+    protected $table = 'calendar';
+
     protected $fillable = ['weekdays'];
 
     public function learningCenters()

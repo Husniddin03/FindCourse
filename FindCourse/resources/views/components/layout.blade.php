@@ -79,7 +79,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                                 <li><a href="{{ route('signup') }}" class="xl"
                                         :class="{ 'mk': page === 'signup' }">Sign
                                         Up</a></li>
-                                <li><a href="{{ route('learning-centers.create') }}" class="xl"
+                                <li><a href="{{ route('course.create') }}" class="xl"
                                         :class="{ 'mk': page === 'create' }">Add Learning Center</a>
                                 </li>
                             </ul>

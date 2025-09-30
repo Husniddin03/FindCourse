@@ -8,7 +8,7 @@
     <div class="container">
         <h2>O‘quv markazni tahrirlash</h2>
 
-        <form action="{{ route('learning-centers.update', $center->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('course.update', $center->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 

@@ -12,12 +12,17 @@ Route::fallback(function () {
 Route::get('/', [PageController::class, 'index'])->name('index');
 Route::get('/blog-grid', [PageController::class, 'blogGrid'])->name('blog-grid');
 Route::get('/blog-single', [PageController::class, 'blogSingle'])->name('blog-single');
-Route::get('/signin', [PageController::class, 'signin'])->name('signin');
-Route::get('/signup', [PageController::class, 'signup'])->name('signup');
 Route::get('/404', [PageController::class, 'notFound'])->name('404');
 
-Route::post('register', [LogController::class, 'register'])->name('register');
-Route::post('login', [LogController::class, 'login'])->name('login');
-Route::post('logout', [LogController::class, 'logout'])->name('logout');
+Route::middleware('guest')->group(function () {
+    Route::get('/signin', [PageController::class, 'signin'])->name('signin');
+    Route::get('/signup', [PageController::class, 'signup'])->name('signup');
 
-Route::resource('course', CourseController::class);
+    Route::post('register', [LogController::class, 'register'])->name('register');
+    Route::post('login', [LogController::class, 'login'])->name('login');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('logout', [LogController::class, 'logout'])->name('logout');
+    Route::resource('course', CourseController::class);
+});
