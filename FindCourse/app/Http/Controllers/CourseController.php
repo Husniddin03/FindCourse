@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\LearningCenter;
 use App\Models\Calendar;
+use App\Models\LearningCentersCalendar;
 use App\Models\LearningCentersImage;
+use App\Models\Subject;
+use App\Models\SubjectsOfLearningCenter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,9 +20,10 @@ class CourseController extends Controller
     }
 
     public function create()
-    {   
+    {
         $days = Calendar::pluck('weekdays')->toArray();
-        return view('course.create')->with('days', $days);
+        $subjects = Subject::pluck('name', 'id')->toArray();
+        return view('course.create')->with('days', $days)->with('subjects', $subjects);
     }
 
     public function store(Request $request)
@@ -54,6 +58,40 @@ class CourseController extends Controller
                 ]);
             }
         }
+
+        $validated1 = $request->validate([
+            'days' => 'nullable|array',
+            'days.*.calendar_id' => 'nullable|exists:calendar,id',
+            'days.*.open_time'   => 'nullable',
+            'days.*.close_time'  => 'nullable',
+        ]);
+
+
+        foreach ($validated1['days'] as $day) {
+            LearningCentersCalendar::create([
+                'learning_centers_id' => $center->id,
+                'calendar_id'        => $day['calendar_id'],
+                'open_time'          => $day['open_time'],
+                'close_time'         => $day['close_time'],
+            ]);
+        }
+
+        $validated2 = $request->validate([
+            'subjects'             => 'nullable|array',
+            'subjects.*.id'        => 'required|exists:subjects,id',
+            'subjects.*.price'     => 'nullable|numeric',
+        ]);
+
+        if (!empty($validated2['subjects'])) {
+            foreach ($validated2['subjects'] as $subject) {
+                SubjectsOfLearningCenter::create([
+                    'learning_centers_id' => $center->id,
+                    'subject_id'          => $subject['id'],
+                    'price'               => $subject['price'] ?? null,
+                ]);
+            }
+        }
+
 
         return redirect()->route('blog-single', $center->id)
             ->with('success', 'O‘quv markaz muvaffaqiyatli qo‘shildi.');

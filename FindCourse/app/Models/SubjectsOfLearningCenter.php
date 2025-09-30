@@ -9,11 +9,11 @@ class SubjectsOfLearningCenter extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['learning_center_id', 'subject_id', 'price'];
+    protected $fillable = ['learning_centers_id', 'subject_id', 'price'];
 
     public function learningCenter()
     {
-        return $this->belongsTo(LearningCenter::class, 'learning_center_id');
+        return $this->belongsTo(LearningCenter::class, 'learning_centers_id');
     }
 
     public function subject()

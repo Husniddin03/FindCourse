@@ -9,11 +9,13 @@ class LearningCentersCalendar extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['learning_center_id', 'calendar_id', 'openTime', 'closetime'];
+    protected $table = 'learning_centers_calendar';
+
+    protected $fillable = ['learning_centers_id', 'calendar_id', 'open_time', 'close_time'];
 
     public function learningCenter()
     {
-        return $this->belongsTo(LearningCenter::class, 'learning_center_id');
+        return $this->belongsTo(LearningCenter::class, 'learning_centers_id');
     }
 
     public function calendar()

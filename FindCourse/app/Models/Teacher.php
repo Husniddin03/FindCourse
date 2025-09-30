@@ -10,11 +10,11 @@ class Teacher extends Model
         'name',
         'bio',
         'photo',
-        'learning_center_id',
+        'learning_centers_id',
     ];
 
     public function learningCenter()
     {
-        return $this->belongsTo(LearningCenter::class, 'learning_center_id');
+        return $this->belongsTo(LearningCenter::class, 'learning_centers_id');
     }
 }

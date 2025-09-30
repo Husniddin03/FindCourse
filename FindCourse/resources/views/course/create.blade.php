@@ -75,6 +75,12 @@
                     <div id="map" style="width: 100%; height: 400px; margin-top: 10px; border-radius:10px;">
                     </div>
 
+                    <div class="edu-center-field-group edu-center-full">
+                        <label for="location" class="edu-center-label">Xaritadan manzilni tanlasangiz Viloyat, Tuman,
+                            manzil va manzil urli automatik to'ldiriladi agarda xato bo'lsa o'zgartirishingiz
+                            mumkin.</label>
+                    </div>
+
                     <!-- Viloyat va Tuman tanlash -->
                     <div class="edu-center-row">
                         <div class="edu-center-field-group edu-center-half">
@@ -127,6 +133,93 @@
                         <label for="location" class="edu-center-label">Markazning kunlik ochilish va yopilish
                             vaqtlarini kiriting. Ishlamaydigan kun uchun bo'sh qoldiring</label>
                     </div>
+
+                    <div class="edu-center-field-group">
+                        <label for="studentCount" class="edu-center-label">Hozirda markazingizdagi o'quvchilar
+                            soni</label>
+                        <input type="number" name="student_count" id="studentCount" class="edu-center-input"
+                            placeholder="0" min="0">
+                    </div>
+
+                    <style>
+                        .edu-center-row {
+                            display: flex;
+                            align-items: center;
+                            gap: 20px;
+                            margin-bottom: 15px;
+                        }
+
+                        .edu-center-half{
+                            width: 48%;
+                        }
+
+                        /* Mobilga moslash */
+                        @media (max-width: 768px) {
+                            .edu-center-row {
+                                flex-direction: column;
+                                align-items: flex-start;
+                            }
+
+                            .edu-center-field-group {
+                                width: 100%;
+                            }
+                        }
+                    </style>
+
+                    <div id="subjects-wrapper">
+                        <div class="edu-center-row">
+                            <div class="edu-center-field-group edu-center-half">
+                                <label class="edu-center-label">Fan</label>
+                                <select name="subjects[0][id]" class="edu-center-input" required>
+                                    <option value="" disabled selected>Fanni tanlang ...</option>
+                                    @foreach ($subjects as $id => $name)
+                                        <option value="{{ $id }}">{{ $name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="edu-center-field-group edu-center-half">
+                                <label class="edu-center-label">Narxi (oyiga)</label>
+                                <input type="text" name="subjects[0][price]" class="edu-center-input"
+                                    placeholder="Masalan: 1000000">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Yangi qator qo‘shish tugmasi -->
+                    <button type="button" id="add-subject" class="edu-center-btn edu-center-btn-secondary">+ Fan qo‘shish</button>
+
+                    <script>
+                        let subjectIndex = 1; // index 0 band bo‘ldi
+
+                        document.getElementById('add-subject').addEventListener('click', function() {
+                            let wrapper = document.getElementById('subjects-wrapper');
+
+                            let newRow = document.createElement('div');
+                            newRow.classList.add('edu-center-row');
+                            newRow.innerHTML = `
+                                <div class="edu-center-field-group edu-center-half">
+                                    <label class="edu-center-label">Fan</label>
+                                    <select name="subjects[${subjectIndex}][id]" class="edu-center-input" required>
+                                        <option value="" disabled selected>Fanni tanlang ...</option>
+                                        @foreach ($subjects as $id => $name)
+                                            <option value="{{ $id }}">{{ $name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="edu-center-field-group edu-center-half">
+                                    <label class="edu-center-label">Narxi (oyiga)</label>
+                                    <input type="text" name="subjects[${subjectIndex}][price]" class="edu-center-input" placeholder="Masalan: 1000000">
+                                </div>
+                            `;
+
+                            wrapper.appendChild(newRow);
+                            subjectIndex++;
+                        });
+                    </script>
+
+
                     <?php
                     $uzbekDays = [
                         1 => 'Dushanba',
@@ -139,35 +232,65 @@
                     ];
                     
                     ?>
-                    @for ($day=0; $day<7; $day++)
-                        <div class="edu-center-row" style="display: flex; align-items: center; gap: 20px;">
 
-                            <div class="edu-center-field-group edu-center-half" style="flex: 1;">
-                                <div style="font-size: 30px" class="edu-center-label">{{ $uzbekDays[$day+1] }}</div>
+                    <style>
+                        .edu-center-row {
+                            display: flex;
+                            align-items: center;
+                            gap: 20px;
+                            margin-bottom: 15px;
+                        }
+
+                        .edu-center-field-group {
+                            flex: 1;
+                        }
+
+                        /* 📱 Mobil ekranlar uchun (768px dan kichik) */
+                        @media (max-width: 768px) {
+                            .edu-center-row {
+                                flex-direction: column;
+                                /* ustma-ust bo‘ladi */
+                                align-items: flex-start;
+                                gap: 10px;
+                            }
+
+                            .edu-center-field-group {
+                                width: 100%;
+                            }
+
+                            .edu-center-label {
+                                font-size: 16px;
+                            }
+                        }
+                    </style>
+
+                    @for ($day = 0; $day < 7; $day++)
+                        <div class="edu-center-row">
+                            <div class="edu-center-field-group">
+                                <div style="font-size: 20px" class="edu-center-label">
+                                    {{ $uzbekDays[$day + 1] }}
+                                </div>
                             </div>
 
-                            <div class="edu-center-field-group edu-center-half" style="flex: 1;">
-                                <label for="region" class="edu-center-label">Ochilishi</label>
-                                <input type="time" name="{{ $days[$day] }}" id="openTime"
+                            <div class="edu-center-field-group">
+                                <label class="edu-center-label">Ochilishi</label>
+                                <input type="time" name="days[{{ $day }}][open_time]"
                                     class="edu-center-input" style="width: 100%;">
                             </div>
 
-                            <div class="edu-center-field-group edu-center-half" style="flex: 1;">
-                                <label for="district" class="edu-center-label">Yopilishi</label>
-                                <input type="time" name="{{ $days[$day] }}" id="closeTime" class="edu-center-input"
-                                    style="width: 100%;">
+                            <div class="edu-center-field-group">
+                                <label class="edu-center-label">Yopilishi</label>
+                                <input type="time" name="days[{{ $day }}][close_time]"
+                                    class="edu-center-input" style="width: 100%;">
                             </div>
 
+                            <input type="hidden" name="days[{{ $day }}][calendar_id]"
+                                value="{{ $day + 1 }}">
                         </div>
                     @endfor
 
 
 
-                    <div class="edu-center-field-group">
-                        <label for="studentCount" class="edu-center-label">O'quvchilar soni</label>
-                        <input type="number" name="student_count" id="studentCount" class="edu-center-input"
-                            placeholder="0" min="0">
-                    </div>
                     <div class="edu-center-buttons">
                         <button type="submit" class="edu-center-btn edu-center-btn-primary">
                             <svg class="edu-center-btn-icon" viewBox="0 0 24 24" fill="none"

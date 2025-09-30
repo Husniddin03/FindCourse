@@ -13,6 +13,6 @@ class LearningCentersImage extends Model
 
     public function learningCenter()
     {
-        return $this->belongsTo(LearningCenter::class, 'learning_center_id');
+        return $this->belongsTo(LearningCenter::class, 'learning_centers_id');
     }
 }
