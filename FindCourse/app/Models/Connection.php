@@ -9,6 +9,8 @@ class Connection extends Model
 {
     use HasFactory;
 
+    protected $table = 'connection';
+
     protected $fillable = ['name'];
 
     public function learningCenters()

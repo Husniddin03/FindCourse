@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\LearningCenter;
 
 class PageController extends Controller
 {
@@ -12,11 +12,13 @@ class PageController extends Controller
     }
     public function blogGrid()
     {
-        return view('pages.blog-grid');
+        $LearningCenters = LearningCenter::all();
+        return view('pages.blog-grid')->with('LearningCenters', $LearningCenters);
     }
-    public function blogSingle()
+    public function blogSingle($id)
     {
-        return view('pages.blog-single');
+        $LearningCenter = LearningCenter::find($id);
+        return view('pages.blog-single')->with('LearningCenter', $LearningCenter);
     }
     public function signin()
     {

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\LearningCenter;
 use App\Models\Calendar;
+use App\Models\Connection;
 use App\Models\LearningCentersCalendar;
+use App\Models\LearningCentersConnect;
 use App\Models\LearningCentersImage;
 use App\Models\Subject;
 use App\Models\SubjectsOfLearningCenter;
@@ -23,11 +25,13 @@ class CourseController extends Controller
     {
         $days = Calendar::pluck('weekdays')->toArray();
         $subjects = Subject::pluck('name', 'id')->toArray();
-        return view('course.create')->with('days', $days)->with('subjects', $subjects);
+        $connections = Connection::pluck('name', 'id')->toArray();
+        return view('course.create')->with('days', $days)->with('subjects', $subjects)->with('connections', $connections);
     }
 
     public function store(Request $request)
     {
+
         $validated = $request->validate([
             'logo'         => 'nullable|image|max:2048',
             'name'         => 'required|string|max:255',
@@ -88,6 +92,23 @@ class CourseController extends Controller
                     'learning_centers_id' => $center->id,
                     'subject_id'          => $subject['id'],
                     'price'               => $subject['price'] ?? null,
+                ]);
+            }
+        }
+
+        
+        $validated3 = $request->validate([
+            'connections'          => 'nullable|array',
+            'connections.*.id'     => 'required|exists:connection,id',
+            'connections.*.url'    => 'required|url',
+        ]);
+
+        if (!empty($validated3['connections'])) {
+            foreach ($validated3['connections'] as $connec) {
+                LearningCentersConnect::create([
+                    'learning_centers_id' => $center->id,
+                    'connection_id'       => $connec['id'],
+                    'url'                 => $connec['url'],
                 ]);
             }
         }

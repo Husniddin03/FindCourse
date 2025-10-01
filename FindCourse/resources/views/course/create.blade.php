@@ -141,6 +141,9 @@
                             placeholder="0" min="0">
                     </div>
 
+
+                    {{-- subjects --}}
+
                     <style>
                         .edu-center-row {
                             display: flex;
@@ -149,7 +152,7 @@
                             margin-bottom: 15px;
                         }
 
-                        .edu-center-half{
+                        .edu-center-half {
                             width: 48%;
                         }
 
@@ -166,6 +169,9 @@
                         }
                     </style>
 
+                    <div class="edu-center-field-group edu-center-full">
+                        <label for="location" class="edu-center-label">Markazda qanday fanlardan dars beriladi</label>
+                    </div>
                     <div id="subjects-wrapper">
                         <div class="edu-center-row">
                             <div class="edu-center-field-group edu-center-half">
@@ -187,7 +193,8 @@
                     </div>
 
                     <!-- Yangi qator qo‘shish tugmasi -->
-                    <button type="button" id="add-subject" class="edu-center-btn edu-center-btn-secondary">+ Fan qo‘shish</button>
+                    <button type="button" id="add-subject" class="edu-center-btn edu-center-btn-secondary">+ Fan
+                        qo‘shish</button>
 
                     <script>
                         let subjectIndex = 1; // index 0 band bo‘ldi
@@ -218,6 +225,71 @@
                             subjectIndex++;
                         });
                     </script>
+
+
+                    {{-- connection --}}
+
+
+                    <div class="edu-center-field-group edu-center-full">
+                        <label class="edu-center-label">Markazda mavjud ulanish turlari</label>
+                    </div>
+
+                    <div id="connections-wrapper">
+                        <div class="edu-center-row">
+                            <div class="edu-center-field-group edu-center-half">
+                                <label class="edu-center-label">Ijtimoiy tarmoq</label>
+                                <select name="connections[0][id]" class="edu-center-input" required>
+                                    <option value="" disabled selected>Ijtimoiy tarmoqni tanlang ...</option>
+                                    @foreach ($connections as $id => $name)
+                                        <option value="{{ $id }}">{{ $name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="edu-center-field-group edu-center-half">
+                                <label class="edu-center-label">Manzili</label>
+                                <input type="url" name="connections[0][url]" class="edu-center-input"
+                                    placeholder="Masalan: https://t.me/username">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Yangi qator qo‘shish tugmasi -->
+                    <button type="button" id="add-connection" class="edu-center-btn edu-center-btn-secondary">
+                        + Ijtimoiy tarmoq qo‘shish
+                    </button>
+
+                    <script>
+                        let connectionIndex = 1; // index 0 band
+
+                        document.getElementById('add-connection').addEventListener('click', function() {
+                            let wrapper = document.getElementById('connections-wrapper');
+
+                            let newRow = document.createElement('div');
+                            newRow.classList.add('edu-center-row');
+                            newRow.innerHTML = `
+                                <div class="edu-center-field-group edu-center-half">
+                                    <label class="edu-center-label">Ijtimoiy tarmoq</label>
+                                    <select name="connections[${connectionIndex}][id]" class="edu-center-input" required>
+                                        <option value="" disabled selected>Ijtimoiy tarmoqni tanlang ...</option>
+                                        @foreach ($connections as $id => $name)
+                                            <option value="{{ $id }}">{{ $name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="edu-center-field-group edu-center-half">
+                                    <label class="edu-center-label">Manzili</label>
+                                    <input type="url" name="connections[${connectionIndex}][url]" class="edu-center-input"
+                                        placeholder="Masalan: https://t.me/username">
+                                </div>
+                            `;
+
+                            wrapper.appendChild(newRow);
+                            connectionIndex++;
+                        });
+                    </script>
+
 
 
                     <?php

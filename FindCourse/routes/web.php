@@ -11,7 +11,7 @@ Route::fallback(function () {
 
 Route::get('/', [PageController::class, 'index'])->name('index');
 Route::get('/blog-grid', [PageController::class, 'blogGrid'])->name('blog-grid');
-Route::get('/blog-single', [PageController::class, 'blogSingle'])->name('blog-single');
+Route::get('/blog-single/{id}', [PageController::class, 'blogSingle'])->name('blog-single');
 Route::get('/404', [PageController::class, 'notFound'])->name('404');
 
 Route::middleware('guest')->group(function () {

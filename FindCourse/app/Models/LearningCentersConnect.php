@@ -9,11 +9,13 @@ class LearningCentersConnect extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['learning_center_id', 'connection_id'];
+    protected $table = 'learning_centers_connect';
+
+    protected $fillable = ['learning_centers_id', 'connection_id', 'url'];
 
     public function learningCenter()
     {
-        return $this->belongsTo(LearningCenter::class, 'learning_center_id');
+        return $this->belongsTo(LearningCenter::class, 'learning_centers_id');
     }
 
     public function connection()

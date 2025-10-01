@@ -109,6 +109,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('learning_centers_id')->constrained('learning_centers')->onDelete('cascade');
             $table->foreignId('connection_id')->constrained('connection')->onDelete('cascade');
+            $table->string('url')->nullable();
             $table->timestamps();
         });
 

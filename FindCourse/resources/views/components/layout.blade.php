@@ -71,7 +71,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                                 <li><a href="{{ route('blog-grid') }}" class="xl"
                                         :class="{ 'mk': page === 'blog-grid' }">Blog
                                         Grid</a></li>
-                                <li><a href="{{ route('blog-single') }}" class="xl"
+                                <li><a href="{{ route('blog-single', 1) }}" class="xl"
                                         :class="{ 'mk': page === 'blog-single' }">Blog Single</a></li>
                                 <li><a href="{{ route('signin') }}" class="xl"
                                         :class="{ 'mk': page === 'signin' }">Sign
@@ -103,7 +103,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                                     fill="" />
                             </svg>
                             <!-- Icon Sun -->
-                            <img class="xc nm" src="{{asset('images/icon-moon.svg')}}" alt="Moon" />
+                            <img class="xc nm" src="{{ asset('images/icon-moon.svg') }}" alt="Moon" />
                         </label>
                     </div>
 
@@ -133,8 +133,42 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
             </div>
         </div>
     </header>
+    <main>
 
-    {{ $slot }}
+        {{ $slot }}
+
+        <!-- ===== CTA Start ===== -->
+        <section class="i pg gh ji">
+            <!-- Bg Shape -->
+            <img class="h p q" src="{{ asset('images/shape-16.svg') }}" alt="Bg Shape" />
+
+            <div class="bb ye i z-10 ki xn dr">
+                <div class="tc uf sn tn un gg">
+                    <div class="animate_left to/2">
+                        <h2 class="fk vj zp pr lk ac">
+                            Join with 5000+ Startups Growing
+                            with Base.
+                        </h2>
+                        <p class="lk">
+                            Lorem ipsum dolor sit amet,
+                            consectetur adipiscing elit.
+                            Nunc quis nibh lorem. Duis sed
+                            odio lorem. In a
+                            efficitur leo. Ut venenatis
+                            rhoncus.
+                        </p>
+                    </div>
+                    <div class="animate_right bf">
+                        <a href="#!" class="vc ek kk hh rg ol il cm gi hi">
+                            Get Started Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CTA End ===== -->
+    </main>
 
     <!-- ===== Footer Start ===== -->
     <footer>
@@ -144,8 +178,8 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                 <div class="tc uf ap gg fp">
                     <div class="animate_top zd/2 to/4">
                         <a href="{{ route('index') }}">
-                            <img src="{{asset('images/logo-light.svg')}}" alt="Logo" class="om" />
-                            <img src="{{asset('images/logo-dark.svg')}}" alt="Logo" class="xc nm" />
+                            <img src="{{ asset('images/logo-light.svg') }}" alt="Logo" class="om" />
+                            <img src="{{ asset('images/logo-dark.svg') }}" alt="Logo" class="xc nm" />
                         </a>
 
                         <p class="lc fb">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
